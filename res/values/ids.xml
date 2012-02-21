@@ -1,0 +1,9 @@
+<resources>
+
+    <item type="id" name="tab_a_content_id"/>
+    <item type="id" name="tab_b_content_id"/>
+    <item type="id" name="tab_c_content_id"/>
+
+
+
+</resources>

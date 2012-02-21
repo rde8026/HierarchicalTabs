@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="HierarchicalTabs" default="dist">
+
+    <property environment="env"/>
+
+    <property file="local.properties"/>
+    <property file="project.properties"/>
+
+
+
+    <property name="version" value="0.1-beta"/>
+    <property name="jar" value="hierarchical-tabs-${version}"/>
+    <property name="support-jar" location="libs/android-support-v4.jar"/>
+
+    <property name="dist" location="dist"/>
+    <property name="bin" location="bin/classes"/>
+    <property name="src" location="src"/>
+
+
+    <tstamp>
+        <format property="current.time"
+                pattern="MM-dd-yyyy hh:mm:ss"/>
+    </tstamp>
+
+    <path id="api.classpath">
+        <pathelement location="${sdk.dir}/platforms/${target}/android.jar"/>
+        <pathelement location="${support-jar}"/>
+    </path>
+
+    <target name="clean">
+        <echo message="${sdk.dir}"/>
+        <tstamp/>
+        <delete dir="${bin}"/>
+        <delete dir="${dist}"/>
+    </target>
+
+    <target name="init" depends="clean">
+        <mkdir dir="${bin}"/>
+        <mkdir dir="${dist}"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <echo message="${sdk.dir}/platforms/${target}"/>
+        <javac destdir="${bin}">
+            <src path="${src}"/>
+            <include name="android/**"/>
+            <classpath refid="api.classpath"/>
+        </javac>
+    </target>
+
+    <target name="dist" depends="compile">
+        <jar destfile="${dist}/${jar}.jar" basedir="${bin}">
+            <fileset dir="${src}" includes="android/**"/>
+        </jar>
+    </target>
+
+</project>
